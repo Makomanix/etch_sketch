@@ -1,4 +1,41 @@
-const grid = document.querySelector('.grid')
+const grid = document.querySelector('.grid');
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+  button.addEventListener('click', function(event) {
+    switch(event) {
+      case "reset":
+        reset()
+        break;
+      case "grid size":
+        setGrid()
+        break;
+      case "toggle":
+        toggleRainbow()
+        break;
+      case "color":
+        selectColor()
+        break;
+    }
+  })
+});
+
+function handleClick(e) {
+  console.log(e);
+  // switch(e.target.value) {
+  //   case "reset":
+      
+  // }
+};
+
+function reset() {};
+
+function setGrid(){};
+
+function selectColor(){};
+
+function toggleRainbow(){};
+
+
 // Create the grid
 function sketchPad(size = 16){
     for (let i = 0; i < size; i++) {
@@ -17,5 +54,7 @@ function sketchPad(size = 16){
 function fillBlock() {
 
 }
+
+
 
 sketchPad();

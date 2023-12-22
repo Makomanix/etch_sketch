@@ -2,34 +2,40 @@ const grid = document.querySelector('.grid');
 
 const buttons = document.querySelectorAll('button');
 
+let boxColor;
+
+let rainbow = false;
+
+let selectedColor = false;
+
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
     switch(e.target.value) {
       case "reset":
         console.log(e.target.value)
-        reset()
+        reset();
         break;
       case "grid size":
         console.log(e.target.value);
-        selectGridSize()
+        selectGridSize();
         break;
       case "toggle":
         console.log(e.target.value);
-        toggleRainbow()
+        toggleRainbow();
+        console.log(rainbow)
         break;
       case "color":
         console.log(e.target.value);
-        selectColor()
+        selectColor();
         break;
     }
   })
 });
 
 function reset() {
-  let allBoxes = document.querySelectorAll('.box');
-
-  allBoxes.forEach(box => {
-    box.style.backgroundColor = 'white'
+  let allBoxes = document.querySelectorAll('.box')
+  .forEach(box => {
+    box.style.backgroundColor = '#ffffff';
   })
 };
 
@@ -37,7 +43,15 @@ function selectGridSize(){};
 
 function selectColor(){};
 
-function toggleRainbow(){};
+function toggleRainbow(){
+  return rainbow ? rainbow = false : rainbow = true;
+  // boxColor = '#' + Math.floor(Math.random().toString(16).substring(2, 8)); 
+};
+
+// function getBoxes() {
+//   let allBoxes = document.querySelectorAll('.box')
+//   return allBoxes;
+// };
 
 
 // Create the grid
@@ -52,18 +66,27 @@ function createGrid(size = 16){
             box.innerText = 'hi';
             box.style.width = 40/size + "rem";
             box.style.height = 40/size + "rem";
-            box.addEventListener('click', (e) => {
-              box.style.backgroundColor = 'black';
-            });
+            box.addEventListener('mouseover', fillBlock);
             column.appendChild(box);
         }
     }
 };
 
-// function fillBlock(e) {
-// console.log(e.target);
+function fillBlock(e) {
+  console.log(boxColor)
+  if (boxColor === undefined || rainbow === false && selectedColor === false) {
+    boxColor = '#000000';
+  };
 
-// }
+  if (rainbow === true) {
+    boxColor = '#' + Math.random().toString(16).substring(2, 8)
+  };
+
+  e.target.style.backgroundColor = boxColor;
+  console.log(e.target.style.backgroundColor);
+};
+
+
 
 
 

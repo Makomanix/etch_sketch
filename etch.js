@@ -8,26 +8,28 @@ let rainbow = false;
 
 let selectedColor = false;
 
+let colorPicker = document.querySelector('.color');
+
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    switch(e.target.value) {
+    switch(e.target.name) {
       case "reset":
-        console.log(e.target.value)
+        console.log(e.target.name)
         reset();
         break;
       case "grid size":
-        console.log(e.target.value);
+        console.log(e.target.name);
         selectGridSize();
         break;
       case "toggle":
-        console.log(e.target.value);
+        console.log(e.target.name);
         toggleRainbow();
         console.log(rainbow)
         break;
-      case "color":
-        console.log(e.target.value);
-        selectColor();
-        break;
+      // case "color":
+      //   console.log(e.target.name);
+      //   selectColor();
+      //   break;
     }
   })
 });
@@ -66,6 +68,7 @@ function createGrid(size = 16){
             box.innerText = 'hi';
             box.style.width = 40/size + "rem";
             box.style.height = 40/size + "rem";
+            box.style.backgroundColor = 'white';
             box.addEventListener('mouseover', fillBlock);
             column.appendChild(box);
         }
@@ -74,6 +77,9 @@ function createGrid(size = 16){
 
 function fillBlock(e) {
   console.log(boxColor)
+
+  if (colorPicker.value === '#ffffff')
+
   if (boxColor === undefined || rainbow === false && selectedColor === false) {
     boxColor = '#000000';
   };

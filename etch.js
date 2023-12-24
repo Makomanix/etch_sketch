@@ -2,13 +2,15 @@ const grid = document.querySelector('.grid');
 
 const buttons = document.querySelectorAll('button');
 
-let boxColor;
 
 let rainbow = false;
 
 let selectedColor = false;
 
 let colorPicker = document.querySelector('.color');
+colorPicker.addEventListener('click', selectColor)
+
+let boxColor = colorPicker.value;
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
@@ -19,17 +21,17 @@ buttons.forEach((button) => {
         break;
       case "grid size":
         console.log(e.target.name);
-        selectGridSize();
+        selectGridSize(e);
         break;
       case "toggle":
         console.log(e.target.name);
-        toggleRainbow();
+        toggleRainbow(e);
         console.log(rainbow)
         break;
-      // case "color":
-      //   console.log(e.target.name);
-      //   selectColor();
-      //   break;
+      case "select":
+        console.log(e.target.name);
+        selectColor(e);
+        break;
     }
   })
 });
@@ -43,17 +45,16 @@ function reset() {
 
 function selectGridSize(){};
 
-function selectColor(){};
-
-function toggleRainbow(){
-  return rainbow ? rainbow = false : rainbow = true;
-  // boxColor = '#' + Math.floor(Math.random().toString(16).substring(2, 8)); 
+function selectColor(e){
+  console.log(colorPicker.value);
+  rainbow = false;
+  console.log(rainbow)
 };
 
-// function getBoxes() {
-//   let allBoxes = document.querySelectorAll('.box')
-//   return allBoxes;
-// };
+function toggleRainbow(){
+  colorPicker.value = '#000000'
+  return rainbow ? rainbow = false : rainbow = true;
+};
 
 
 // Create the grid
@@ -68,7 +69,7 @@ function createGrid(size = 16){
             box.innerText = 'hi';
             box.style.width = 40/size + "rem";
             box.style.height = 40/size + "rem";
-            box.style.backgroundColor = 'white';
+            box.style.backgroundColor = '#ffffff';
             box.addEventListener('mouseover', fillBlock);
             column.appendChild(box);
         }
@@ -78,11 +79,7 @@ function createGrid(size = 16){
 function fillBlock(e) {
   console.log(boxColor)
 
-  if (colorPicker.value === '#ffffff')
-
-  if (boxColor === undefined || rainbow === false && selectedColor === false) {
-    boxColor = '#000000';
-  };
+  boxColor = colorPicker.value;
 
   if (rainbow === true) {
     boxColor = '#' + Math.random().toString(16).substring(2, 8)
@@ -91,9 +88,6 @@ function fillBlock(e) {
   e.target.style.backgroundColor = boxColor;
   console.log(e.target.style.backgroundColor);
 };
-
-
-
 
 
 createGrid();

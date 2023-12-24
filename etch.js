@@ -2,6 +2,7 @@ const grid = document.querySelector('.grid');
 
 const buttons = document.querySelectorAll('button');
 
+let column;
 
 let rainbow = false;
 
@@ -36,14 +37,40 @@ buttons.forEach((button) => {
   })
 });
 
+
 function reset() {
+  eraseGrid();
+
   let allBoxes = document.querySelectorAll('.box')
   .forEach(box => {
     box.style.backgroundColor = '#ffffff';
   })
+  createGrid();
 };
 
-function selectGridSize(){};
+function eraseGrid() {
+  let erase = document.querySelectorAll('.column')
+  let eraseArray = Array.from(erase);
+  console.log(erase);
+
+  if (eraseArray.length > 0) {
+    eraseArray.forEach((erased) => {grid.removeChild(erased)}) 
+  }
+}
+
+function selectGridSize(){
+
+  eraseGrid();
+
+  let size = prompt("Select Grid Size between 10 and 100", "");
+
+  if (size < 10 || size > 100 || size === "") {
+    alert("Grid size entered was not between 10 and 100. Try again!")
+    size = prompt("Select Grid Size between 10 and 100", "")
+  }
+  console.log(size)
+  createGrid(size)
+};
 
 function selectColor(e){
   console.log(colorPicker.value);
@@ -59,19 +86,21 @@ function toggleRainbow(){
 
 // Create the grid
 function createGrid(size = 16){
+
     for (let i = 0; i < size; i++) {
-        let column = document.createElement('div');
+      console.log('make columns')
+        column = document.createElement('div');
         column.classList.toggle('column');
         grid.appendChild(column);
         for (let j = 0; j < size; j++) {
-            let box = document.createElement('div');
-            box.classList.toggle('box');
-            box.innerText = 'hi';
-            box.style.width = 40/size + "rem";
-            box.style.height = 40/size + "rem";
-            box.style.backgroundColor = '#ffffff';
-            box.addEventListener('mouseover', fillBlock);
-            column.appendChild(box);
+          let box = document.createElement('div');
+          box.classList.toggle('box');
+          box.innerText = 'hi';
+          box.style.width = 40/size + "rem";
+          box.style.height = 40/size + "rem";
+          box.style.backgroundColor = '#ffffff';
+          box.addEventListener('mouseover', fillBlock);
+          column.appendChild(box);
         }
     }
 };

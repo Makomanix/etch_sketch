@@ -9,6 +9,7 @@ let rainbow = false;
 let opacity = false;
 
 let selectedColor = false;
+let size;
 
 let colorPicker = document.querySelector('.color');
 colorPicker.addEventListener('click', selectColor)
@@ -55,7 +56,7 @@ function reset() {
   .forEach(box => {
     box.style.backgroundColor = '#ffffff';
   })
-  createGrid();
+  createGrid(size);
 };
 
 function eraseGrid() {
@@ -70,9 +71,10 @@ function eraseGrid() {
 
 function selectGridSize(){
 
+  boxArray = [];
   eraseGrid();
 
-  let size = prompt("Select Grid Size between 10 and 100", "");
+  size = prompt("Select Grid Size between 10 and 100", "");
 
   if (size < 10 || size > 50 || size === "") {
     alert("Grid size entered was not between 10 and 100. Try again!")

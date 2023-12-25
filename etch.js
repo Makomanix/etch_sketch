@@ -48,6 +48,7 @@ function toggleOpacity() {
 };
 
 function reset() {
+  boxArray = [];
   eraseGrid();
 
   let allBoxes = document.querySelectorAll('.box')
@@ -131,9 +132,10 @@ function fillBlock(e) {
   };
 
   if ( opacity === true) {
-    let count = boxArray[e.target.innerText].count += 1
+    let count = boxArray[(e.target.innerText) - 1].count += 1;
     e.target.style.backgroundColor = boxColor;
-    if ( boxArray[e.target.innerText].count >= 10 ) {
+    
+    if ( boxArray[(e.target.innerText) - 1].count >= 10 ) {
       e.target.style.opacity = 1.0;
     } else {
       e.target.style.opacity = count * .1;

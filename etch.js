@@ -1,11 +1,19 @@
 const grid = document.querySelector('.grid');
-
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('button')
 
 let colorPicker = document.querySelector('.color');
-colorPicker.addEventListener('click', selectColor)
+colorPicker.addEventListener('click', (e) => {
+  console.log(colorPicker.parentElement)
+  highlight(colorPicker.parentElement)
+  rainbow = false;
+  console.log('hi')
+})
+
+let toggle = document.querySelector('.toggle')
 
 let rainbow = false;
+
+let rainbowFlash;
 
 let opacity = false;
 
@@ -15,13 +23,15 @@ let size;
 
 let boxColor = colorPicker.value;
 
-let boxArray = [];
+let boxArray = []; 
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
+    
     switch(e.target.name) {
       
       case "opacity":
+        // highlight(e);
         toggleOpacity();
         break;
 
@@ -34,24 +44,62 @@ buttons.forEach((button) => {
         break;
 
       case "toggle":
+        // highlight(e);
         toggleRainbow(e);
         break;
 
       case "select":
-        selectColor(e);
+        rainbow = false;
         break;
 
     }
   })
 });
 
-function toggleOpacity() { 
+
+function highlight(backgroundColor) {
+  if (backgroundColor.name === 'select') {
+    backgroundColor.classList.add('active')
+  } else {
+    backgroundColor.classList.toggle('active')
+  }
+};
+
+function toggleRainbow(e){
+  colorPicker.value = '#000000'
+
+  if (rainbow === false) {
+    rainbow = true;
+    console.log(rainbow);
+    rainbowFlash = setInterval(randomBackground, 500)
+  } else if (rainbow === true){
+    rainbow = false;
+    console.log(rainbow);
+      clearInterval(rainbowFlash);
+      rainbowFlash = null;
+      toggle.style.backgroundColor = 'red';
+  }
+};
+
+function randomBackground() {
+  toggle.style.backgroundColor = '#' + Math.random().toString(16).substring(2, 8)
+};
+
+function toggleOpacity() {
+  let backgroundColor = document.querySelector('.opacity')
+  highlight(backgroundColor);
+
   opacity ? opacity = false : opacity = true;
 };
 
 function reset() {
   boxArray = [];
   eraseGrid();
+  
+  opacity ? toggleOpacity() : null;
+  
+  rainbow ? toggleRainbow() : null;
+  
 
   let allBoxes = document.querySelectorAll('.box')
   .forEach(box => {
@@ -86,14 +134,6 @@ function selectGridSize(){
   createGrid(size)
 };
 
-function selectColor(e){
-  rainbow = false;
-};
-
-function toggleRainbow(){
-  colorPicker.value = '#000000'
-  return rainbow ? rainbow = false : rainbow = true;
-};
 
 // Create the grid
 function createGrid(size = 16){

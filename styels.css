@@ -63,3 +63,7 @@ button {
     color: gold;
     border-radius: 20px;
 }
+
+.active{
+    background-color: gray;
+}

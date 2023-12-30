@@ -170,7 +170,7 @@ function createGrid(size = 16){
           let boxObject = {count: 0};
           boxArray.push(boxObject);
 
-          box.innerText = boxArray.length;
+          box.value = boxArray.length;
 
           box.classList.toggle('box');
           box.style.height = 40/size + "rem";
@@ -196,10 +196,11 @@ function fillBlock(e) {
   };
 
   if ( opacity === true) {
-    let count = boxArray[(e.target.innerText) - 1].count += 1;
+    console.log(e.target.value)
+    let count = boxArray[(e.target.value) - 1].count += 1;
     e.target.style.backgroundColor = boxColor;
     
-    if ( boxArray[(e.target.innerText) - 1].count >= 10 ) {
+    if ( boxArray[(e.target.value) - 1].count >= 10 ) {
       e.target.style.opacity = 0.1;
 
     } else {

@@ -3,7 +3,7 @@ const buttons = document.querySelectorAll('button')
 
 let colorPicker = document.querySelector('.color');
 colorPicker.addEventListener('click', (e) => {
-  console.log(colorPicker.parentElement)
+  
   highlight(colorPicker.parentElement)
 
   toggleRainbow(colorPicker.parentElement);
@@ -61,6 +61,7 @@ buttons.forEach((button) => {
 function highlight(backgroundColor) {
   console.log('rainbow');
   if (backgroundColor.name === 'select') {
+    
     backgroundColor.classList.add('active')
 
   } else {
@@ -74,7 +75,7 @@ function toggleRainbow(e){
     clearInterval(rainbowFlash);
     rainbowFlash = null;
     toggle.style.backgroundColor = 'red';
-    console.log(e)
+    
   };
   
   if (rainbow === false && e !== colorPicker.parentElement) {
@@ -93,7 +94,7 @@ function toggleRainbow(e){
       clearInterval(rainbowFlash);
       rainbowFlash = null;
       toggle.style.backgroundColor = 'red';
-      console.log(e)
+      
 
   }
 };
@@ -113,7 +114,7 @@ function reset() {
   boxArray = [];
   eraseGrid();
   colorPicker.value = "#000000"
-  colorPicker.parentElement.style.backgroundColor = 'red';
+  colorPicker.parentElement.classList.remove('active');
   
   opacity ? toggleOpacity() : null;
   

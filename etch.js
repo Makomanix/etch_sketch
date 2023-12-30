@@ -5,8 +5,9 @@ let colorPicker = document.querySelector('.color');
 colorPicker.addEventListener('click', (e) => {
   console.log(colorPicker.parentElement)
   highlight(colorPicker.parentElement)
-  rainbow = false;
-  console.log('hi')
+
+  toggleRainbow(colorPicker.parentElement);
+  
 })
 
 let toggle = document.querySelector('.toggle')
@@ -44,7 +45,7 @@ buttons.forEach((button) => {
         break;
 
       case "toggle":
-        // highlight(e);
+        highlight(e.target);
         toggleRainbow(e);
         break;
 
@@ -58,26 +59,42 @@ buttons.forEach((button) => {
 
 
 function highlight(backgroundColor) {
+  console.log('rainbow');
   if (backgroundColor.name === 'select') {
     backgroundColor.classList.add('active')
+
   } else {
     backgroundColor.classList.toggle('active')
   }
 };
 
 function toggleRainbow(e){
-  colorPicker.value = '#000000'
+  if (e === colorPicker.parentElement) {
 
-  if (rainbow === false) {
+    clearInterval(rainbowFlash);
+    rainbowFlash = null;
+    toggle.style.backgroundColor = 'red';
+    console.log(e)
+  };
+  
+  if (rainbow === false && e !== colorPicker.parentElement) {
+    colorPicker.value = '#000000'
+    
     rainbow = true;
-    console.log(rainbow);
+
+    colorPicker.parentElement.classList.contains('active') ?
+      colorPicker.parentElement.classList.remove('active') : null;
+    
     rainbowFlash = setInterval(randomBackground, 500)
+
   } else if (rainbow === true){
     rainbow = false;
-    console.log(rainbow);
+
       clearInterval(rainbowFlash);
       rainbowFlash = null;
       toggle.style.backgroundColor = 'red';
+      console.log(e)
+
   }
 };
 
@@ -95,6 +112,8 @@ function toggleOpacity() {
 function reset() {
   boxArray = [];
   eraseGrid();
+  colorPicker.value = "#000000"
+  colorPicker.parentElement.style.backgroundColor = 'red';
   
   opacity ? toggleOpacity() : null;
   
@@ -180,7 +199,7 @@ function fillBlock(e) {
     e.target.style.backgroundColor = boxColor;
     
     if ( boxArray[(e.target.innerText) - 1].count >= 10 ) {
-      e.target.style.opacity = 1.0;
+      e.target.style.opacity = 0.1;
 
     } else {
       e.target.style.opacity = count * .1;

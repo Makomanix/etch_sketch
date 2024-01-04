@@ -9,14 +9,16 @@ body {
     height: 100dvh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    background-color: rgb(31, 63, 95);
 }
 
 header {
     text-align: center;
-    margin-top: 6rem;
     font-size: 3rem;
     color: gold;
     z-index: 40;
+    margin-bottom: 1rem;
 }
 
 .grid {
@@ -31,7 +33,7 @@ header {
     outline-color: red;
     outline-width: 5rem;
     border-radius: 1rem;
-    z-index: 1;
+    z-index: 30;
 };
 
 .column {
@@ -39,7 +41,7 @@ header {
 }
 
 .box {
-    z-index: 40;
+    z-index: 10;
 }
 
 .menu {
@@ -48,7 +50,7 @@ header {
     justify-content: center;
     gap: 2rem;
     margin-top: 1rem;
-    z-index: 1;
+    z-index: 40;
 }
 
 button {

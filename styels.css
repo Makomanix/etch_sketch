@@ -13,8 +13,7 @@ body {
 
 header {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 6rem;
     font-size: 3rem;
     color: gold;
     z-index: 40;
@@ -31,9 +30,6 @@ header {
     outline-style: solid;
     outline-color: red;
     outline-width: 5rem;
-    /* border: solid;
-    border-width: 5rem;
-    border-color: red; */
     border-radius: 1rem;
     z-index: 1;
 };
